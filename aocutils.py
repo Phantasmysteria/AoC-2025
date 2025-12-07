@@ -32,9 +32,11 @@ def sliceView(data: dict, start: int, end: int) -> dict:
             ret[k] = v
     return ret
 
-class TwoDGrid:
-    def __init__(self):
-        pass
+# Yes I know Counter class exists
+def addToCounter(data: dict[Any, int], key: Any, val: int) -> None:
+    if key not in data:
+        data[key] = 0
+    data[key] += val
 
 if __name__ == '__main__':
     print("Why are you running this file?")
