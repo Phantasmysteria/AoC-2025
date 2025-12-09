@@ -38,5 +38,32 @@ def addToCounter(data: dict[Any, int], key: Any, val: int) -> None:
         data[key] = 0
     data[key] += val
 
+# I have never implemented union-find until now
+class UnionFindSize:
+    def __init__(self, length):
+        self.parents = list(range(length))
+        self.sizes = [1 for _ in range(length)]
+
+    def find(self, x):
+        if self.parents[x] == x:
+            return self.parents[x]
+        return self.find(self.parents[x])
+
+    def union(self, x, y):
+        xRoot = self.find(x)
+        yRoot = self.find(y)
+
+        if xRoot == yRoot:
+            return
+
+        if self.sizes[xRoot] < self.sizes[yRoot]:
+            xRoot, yRoot = yRoot, xRoot
+
+        self.parents[yRoot] = xRoot
+        self.sizes[xRoot] += self.sizes[yRoot]
+
+    def __repr__(self):
+        return str([(x, y) for x, y in zip(self.parents, self.sizes)])
+
 if __name__ == '__main__':
     print("Why are you running this file?")
